@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAU Portal Lab - Introduction</title>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+<body>
+  <div class="intro-page">
+    <div class="intro-wrapper">
+      <div class="intro-logo">
+        <img src="/public/kau-logo.png" alt="KAU Logo" />
+      </div>
+
+      <div class="intro-card-modern">
+        <h1 class="intro-main-title">KAU Portal</h1>
+
+        <div class="intro-tags">
+          <span class="intro-tag red">Red Team</span>
+          <span class="intro-tag">Beginner</span>
+          <span class="intro-tag">Authentication Bypass</span>
+        </div>
+
+        <section class="intro-section">
+          <h2>Scenario</h2>
+          <p>
+            You are assessing a university portal login page as part of a Red Team exercise.
+            Initial review suggests weak input handling in the authentication flow, which may
+            allow an attacker to bypass login controls and gain unauthorized access to protected resources.
+          </p>
+          <p>
+            Your task is to analyze the login behavior, identify the weakness, and validate whether
+            the application is vulnerable to SQL Injection that can lead to authentication bypass
+            and administrator access.
+          </p>
+        </section>
+
+        <section class="intro-section">
+          <h2>Learning Objectives</h2>
+          <ul class="intro-list">
+            <li>Analyze login form behavior</li>
+            <li>Identify weak input handling in authentication</li>
+            <li>Bypass the login mechanism without valid credentials</li>
+            <li>Access the internal dashboard</li>
+            <li>Reach the administrator area and observe the security impact</li>
+          </ul>
+        </section>
+
+        <div class="intro-actions">
+          <a href="/login" class="intro-btn primary">Begin Lab</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

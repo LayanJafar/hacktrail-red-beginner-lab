@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAU Admin Panel</title>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">KAU Admin Panel</div>
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/admin-panel">Admin Panel</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <section class="hero-box">
+      <h1>Administrator Access Area</h1>
+      <p>Restricted internal administration section.</p>
+    </section>
+
+    <section class="grid-2">
+      <div class="card" id="flag2-card" style="display: none;">
+        <h2>Flag 2</h2>
+        <p>Privilege escalation explanation:</p>
+        <div class="flag-box" id="flag2"></div>
+        <p class="flag-desc">
+          This confirms that the user reached an administrator-only area through untrusted input, which shows broken
+          access control.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Admin Services</h2>
+      <ul class="simple-list">
+        <li>User management</li>
+        <li>Role control</li>
+        <li>Internal configuration review</li>
+        <li>Restricted secret records</li>
+      </ul>
+    </section>
+
+    <section class="card" id="lab-complete-card" style="display: none;">
+      <h2>Lab Completed</h2>
+      <p>You have successfully completed the lab objectives.</p>
+      <button class="main-btn" onclick="exitLab()">Exit Lab</button>
+    </section>
+  </main>
+
+  <script>
+    fetch("/api/admin-secret")
+      .then((response) => {
+        if (!response.ok) {
+          return null;
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.exploitUsed) {
+          document.getElementById("flag2-card").style.display = "block";
+          document.getElementById("flag2").textContent = data.flag2;
+        }
+      })
+      .catch(() => {
+        // no action needed
+      });
+  </script>
+  <script>
+    fetch("/api/admin-secret")
+      .then((response) => {
+        if (!response.ok) {
+          return null;
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.exploitUsed) {
+          document.getElementById("flag2-card").style.display = "block";
+          document.getElementById("flag2").textContent = data.flag2;
+          document.getElementById("lab-complete-card").style.display = "block";
+        }
+      })
+      .catch(() => {
+        // no action needed
+      });
+  </script>
+</body>
+
+</html>

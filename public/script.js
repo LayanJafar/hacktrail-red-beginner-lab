@@ -1,0 +1,1 @@
+console.log("KAU SQLi Lab Loaded");

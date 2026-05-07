@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAU Portal Dashboard</title>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">KAU Portal</div>
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/admin-panel">Admin Panel</a>
+      <a href="/logout">Logout</a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <section class="hero-box">
+      <h1>Welcome to the KAU Internal Dashboard</h1>
+      <p>This page represents the student and administrator portal landing area.</p>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h2>Session Information</h2>
+        <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+        <p><strong>Role:</strong> <span id="role">Loading...</span></p>
+      </div>
+
+      <div class="card" id="flag1-card" style="display: none;">
+        <h2>Flag 1</h2>
+        <p>Authentication bypass explanation:</p>
+        <div class="flag-box" id="flag1"></div>
+        <p class="flag-desc">
+          This confirms that the login process accepted manipulated input and granted access without proper credential
+          verification.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Portal Services</h2>
+      <ul class="simple-list">
+        <li>Student dashboard access</li>
+        <li>Academic profile view</li>
+        <li>Internal announcements</li>
+        <li>Administrative services</li>
+      </ul>
+      <a href="/admin-panel" class="btn-secondary">Go to Admin Panel</a>
+    </section>
+  </main>
+
+  <script>
+  fetch("/api/session")
+    .then((response) => {
+      if (!response.ok) {
+        window.location.href = "/login";
+        return;
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data) return;
+
+      document.getElementById("username").textContent = data.username;
+      document.getElementById("role").textContent = data.role;
+
+      if (data.exploitUsed) {
+        document.getElementById("flag1-card").style.display = "block";
+        document.getElementById("flag1").textContent = data.flag1;
+      }
+    })
+    .catch(() => {
+      window.location.href = "/login";
+    });
+</script>
+</body>
+
+</html>

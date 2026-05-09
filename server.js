@@ -91,7 +91,11 @@ app.post("/login", (req, res) => {
         exploitUsed: exploitUsed
       };
 
-      res.cookie("sessionId", sessionId);
+      res.cookie("sessionId", sessionId, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+      });
       return res.redirect("/dashboard");
     }
 
